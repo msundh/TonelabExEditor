@@ -1,14 +1,12 @@
 package nu.mikaelsundh.tonelabex.editor.midi;
 
-import org.apache.log4j.Logger;
-
 /**
  * Author: Mikael Sundh
  * Date: 2012-11-06
  */
 public class SendChangePreset extends MidiCommand {
 
-    Logger logger = Logger.getLogger(this.getClass().getName());
+
 
     public SendChangePreset(int idx) throws MidiException {
         if (idx < 0 || idx > 99) {

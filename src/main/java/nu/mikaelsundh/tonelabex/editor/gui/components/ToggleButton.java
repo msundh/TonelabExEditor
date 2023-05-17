@@ -1,14 +1,13 @@
 package nu.mikaelsundh.tonelabex.editor.gui.components;
 
 import nu.mikaelsundh.tonelabex.editor.model.Constants;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.metal.MetalButtonUI;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.IOException;
 
 /**
@@ -16,8 +15,7 @@ import java.io.IOException;
  * Date: 2012-11-09
  */
 public class ToggleButton extends JToggleButton {
-    Logger logger = Logger.getLogger(this.getClass().getName());
-//    private boolean  mOn;
+    private static Logger logger = LogManager.getLogger(ToggleButton.class);
 
     public ToggleButton() {
         super();

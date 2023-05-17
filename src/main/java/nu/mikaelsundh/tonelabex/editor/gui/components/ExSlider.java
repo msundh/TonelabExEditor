@@ -1,23 +1,18 @@
 package nu.mikaelsundh.tonelabex.editor.gui.components;
 
 import nu.mikaelsundh.tonelabex.editor.model.Constants;
-import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 /**
  * User: Mikael Sundh
  * Date: 2012-11-08
  */
 public class ExSlider extends JSlider {
-    Logger logger = Logger.getLogger(this.getClass().getName());
+
     int mMinVal;
     int mMaxVal;
 

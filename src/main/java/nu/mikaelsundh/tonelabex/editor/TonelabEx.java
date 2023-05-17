@@ -2,13 +2,12 @@ package nu.mikaelsundh.tonelabex.editor;
 
 import nu.mikaelsundh.tonelabex.editor.gui.MainFrame;
 import nu.mikaelsundh.tonelabex.editor.midi.MidiController;
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+//import org.apache.log4j.BasicConfigurator;
+//import org.apache.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -16,7 +15,7 @@ import java.io.IOException;
  * Date: 2012-11-07
  */
 public class TonelabEx {
-    static final Logger logger = Logger.getLogger(TonelabEx.class.getName());
+    private static Logger logger = LogManager.getLogger(TonelabEx.class);
 
     public static final boolean DEVELOPE_MIDI_ON=true;
     public static final boolean DEVELOPE_TEST_MENU_ON=false;
@@ -30,8 +29,8 @@ public class TonelabEx {
 
 
     private void start() {
-        BasicConfigurator.configure();
-        Logger.getRootLogger().setLevel(Level.INFO);
+//        BasicConfigurator.configure();
+//        Logger.getRootLogger().setLevel(Level.INFO);
 //        PropertyConfigurator.configure("filename.properties");
 
 //        Frame frame = new Frame("Tonelab EX Editor");

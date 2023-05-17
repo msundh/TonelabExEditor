@@ -4,7 +4,8 @@ import nu.mikaelsundh.tonelabex.editor.gui.GuiListenerHandler;
 import nu.mikaelsundh.tonelabex.editor.model.DeviceEvent;
 import nu.mikaelsundh.tonelabex.editor.model.ExPreset;
 import nu.mikaelsundh.tonelabex.editor.utils.MidiUtil;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.sound.midi.MidiMessage;
 import java.util.LinkedList;
@@ -15,7 +16,7 @@ import java.util.LinkedList;
  * Date: 2012-11-04
  */
 public class MidiReceiver extends Thread {
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    private static Logger logger = LogManager.getLogger(MidiReceiver.class);
     boolean running=true;
     GuiListenerHandler guiListener = GuiListenerHandler.getInstance();
     LinkedList<MidiMessage> incomingData=new LinkedList<MidiMessage>();

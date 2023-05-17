@@ -5,14 +5,15 @@ import nu.mikaelsundh.tonelabex.editor.midi.MidiConstants;
 import nu.mikaelsundh.tonelabex.editor.utils.HexUtil;
 import nu.mikaelsundh.tonelabex.editor.utils.MidiUtil;
 import nu.mikaelsundh.tonelabex.editor.utils.PresetParser;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Author: Mikael Sundh
  * Date: 2012-11-04
  */
 public class ExPreset {
-    Logger logger  = Logger.getLogger(this.getClass().getName());
+    private static Logger logger = LogManager.getLogger(ExPreset.class);
     private int nbr;
     private int bank;
     private int nbrInBank;

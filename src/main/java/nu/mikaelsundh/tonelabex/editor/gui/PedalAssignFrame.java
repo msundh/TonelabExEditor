@@ -5,15 +5,14 @@ import nu.mikaelsundh.tonelabex.editor.midi.MidiException;
 import nu.mikaelsundh.tonelabex.editor.model.Constants;
 import nu.mikaelsundh.tonelabex.editor.model.DeviceEvent;
 import nu.mikaelsundh.tonelabex.editor.model.PedalAssignValue;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -22,7 +21,7 @@ import java.awt.event.MouseEvent;
  * Date: 2012-11-08
  */
 public class PedalAssignFrame extends JPanel {
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    private static Logger logger = LogManager.getLogger(PedalAssignFrame.class);
     GuiListenerHandler guiListener;
     ToggleButton mInverted;
     boolean initiating = false;

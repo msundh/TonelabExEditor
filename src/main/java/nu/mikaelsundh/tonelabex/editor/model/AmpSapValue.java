@@ -1,14 +1,15 @@
 package nu.mikaelsundh.tonelabex.editor.model;
 
-import nu.mikaelsundh.tonelabex.editor.utils.PresetParser;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * User: Mikael Sundh
  * Date: 2012-11-10
  */
 public class AmpSapValue {
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    private static Logger logger = LogManager.getLogger(AmpSapValue.class);
     private static boolean mOn;
     private static int mType;
     private static int mModel;
