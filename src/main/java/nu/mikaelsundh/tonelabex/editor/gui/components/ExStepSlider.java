@@ -1,7 +1,9 @@
 package nu.mikaelsundh.tonelabex.editor.gui.components;
 
 import nu.mikaelsundh.tonelabex.editor.model.Constants;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -13,7 +15,7 @@ import java.util.Hashtable;
  * Date: 2012-11-08
  */
 public class ExStepSlider extends JSlider {
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    private static Logger logger = LogManager.getLogger(ExStepSlider.class);
     int mMinVal;
     int mMaxVal;
 

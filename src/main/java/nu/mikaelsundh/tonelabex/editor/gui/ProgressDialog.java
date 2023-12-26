@@ -1,7 +1,5 @@
 package nu.mikaelsundh.tonelabex.editor.gui;
 
-import org.apache.log4j.Logger;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,7 +8,7 @@ import java.awt.*;
  * Date: 2012-11-05
  */
 public class ProgressDialog extends JDialog {
-    Logger logger = Logger.getLogger(this.getClass().getName());
+
     JProgressBar progress;
 
     public ProgressDialog(Frame owner) {

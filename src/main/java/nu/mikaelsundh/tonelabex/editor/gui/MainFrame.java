@@ -7,7 +7,8 @@ import nu.mikaelsundh.tonelabex.editor.midi.*;
 import nu.mikaelsundh.tonelabex.editor.model.*;
 import nu.mikaelsundh.tonelabex.editor.utils.FileManager;
 import nu.mikaelsundh.tonelabex.editor.utils.HexUtil;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -24,7 +25,7 @@ import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
  * Date: 2012-11-04
  */
 public class MainFrame extends JFrame implements MenuContainer, Serializable, RootPaneContainer, WindowConstants, DeviceListener {
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    private static Logger logger = LogManager.getLogger(MainFrame.class);
     private static final int MAIN_WINDOW_HEIGTH = 850;
     private static final int MAIN_WINDOW_WIDTH = 1445;
     MidiController deviceCtrl;

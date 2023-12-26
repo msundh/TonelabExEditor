@@ -6,15 +6,14 @@ import nu.mikaelsundh.tonelabex.editor.gui.components.ToggleButton;
 import nu.mikaelsundh.tonelabex.editor.model.Constants;
 import nu.mikaelsundh.tonelabex.editor.model.DelayValue;
 import nu.mikaelsundh.tonelabex.editor.model.DeviceEvent;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Enumeration;
@@ -24,7 +23,7 @@ import java.util.Enumeration;
  * Date: 2012-11-08
  */
 public class DelayFrame extends JPanel {
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    private static Logger logger = LogManager.getLogger(DelayFrame.class);
     GuiListenerHandler guiListener;
     boolean initiating=false;
     ExStepSlider mType;

@@ -5,7 +5,9 @@ import nu.mikaelsundh.tonelabex.editor.gui.components.ExStepSlider;
 import nu.mikaelsundh.tonelabex.editor.model.AmpSapValue;
 import nu.mikaelsundh.tonelabex.editor.model.Constants;
 import nu.mikaelsundh.tonelabex.editor.model.DeviceEvent;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -22,7 +24,7 @@ import java.io.IOException;
  * Date: 2012-11-07
  */
 public class AmpModeFrame extends JPanel {
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    private static Logger logger = LogManager.getLogger(AmpModeFrame.class);
     GuiListenerHandler guiListener;
     boolean initiating = false;
     private static final String AMP_NORMAL = "Normal";

@@ -2,7 +2,8 @@ package nu.mikaelsundh.tonelabex.editor.utils;
 
 import nu.mikaelsundh.tonelabex.editor.midi.MessageBuilder;
 import nu.mikaelsundh.tonelabex.editor.model.ExPreset;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.io.*;
  * Date: 2012-11-06
  */
 public class FileManager {
-    static Logger logger = Logger.getLogger(FileManager.class.getName());
+    private static Logger logger = LogManager.getLogger(FileManager.class);
 
     public static void writePresetToFile(Component parent, ExPreset preset) {
         JFileChooser jfc = new JFileChooser();

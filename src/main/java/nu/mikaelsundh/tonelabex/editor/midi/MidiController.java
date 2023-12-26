@@ -1,7 +1,8 @@
 package nu.mikaelsundh.tonelabex.editor.midi;
 
 import nu.mikaelsundh.tonelabex.editor.utils.HexUtil;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsresources.midi.MidiCommon;
 
 import javax.sound.midi.*;
@@ -13,7 +14,7 @@ import java.util.Stack;
  * Date: 2012-11-04
  */
 public class MidiController implements Receiver {
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    private static Logger logger = LogManager.getLogger(MidiController.class);
     private static MidiController instance;
     MidiDevice outDevice = null;
     MidiDevice input = null;

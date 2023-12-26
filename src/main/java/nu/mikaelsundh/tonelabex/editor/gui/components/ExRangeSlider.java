@@ -1,9 +1,11 @@
 package nu.mikaelsundh.tonelabex.editor.gui.components;
 
-//import nu.mikaelsundh.tonelabex.editor.gui.components.rangeslider.RangeSlider;
+
 import com.jidesoft.swing.RangeSlider;
 import nu.mikaelsundh.tonelabex.editor.model.Constants;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -15,7 +17,7 @@ import javax.swing.event.ChangeListener;
  * Date: 2012-11-19
  */
 public class ExRangeSlider extends RangeSlider {
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    private static Logger logger = LogManager.getLogger(ExRangeSlider.class);
     int mMinVal;
     int mMaxVal;
 

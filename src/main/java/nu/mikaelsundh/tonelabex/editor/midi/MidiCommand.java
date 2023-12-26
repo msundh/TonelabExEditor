@@ -2,14 +2,15 @@ package nu.mikaelsundh.tonelabex.editor.midi;
 
 import nu.mikaelsundh.tonelabex.editor.utils.HexUtil;
 import nu.mikaelsundh.tonelabex.editor.utils.MidiUtil;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Author: Mikael Sundh
  * Date: 2012-11-06
  */
 public abstract class MidiCommand implements IMidiCommand {
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    private static Logger logger = LogManager.getLogger(MidiCommand.class);
 
     public enum State { NEW, INIT, EXECUTED, FINISHED, WAIT, ARRIVED };
     protected State state = State.NEW;

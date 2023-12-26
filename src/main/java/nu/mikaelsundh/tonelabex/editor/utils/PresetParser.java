@@ -1,7 +1,6 @@
 package nu.mikaelsundh.tonelabex.editor.utils;
 
 import nu.mikaelsundh.tonelabex.editor.model.*;
-import org.apache.log4j.Logger;
 
 import java.math.BigInteger;
 
@@ -10,7 +9,6 @@ import java.math.BigInteger;
  * Date: 2012-11-10
  */
 public class PresetParser {
-    static Logger logger = Logger.getLogger(PresetParser.class.getName());
 
     public static final int BIN_PEDAL1_ON = 0x01;
     public static final int BIN_PEDAL2_ON = 0x02;

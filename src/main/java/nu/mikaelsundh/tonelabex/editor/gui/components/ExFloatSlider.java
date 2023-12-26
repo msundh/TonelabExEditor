@@ -1,7 +1,9 @@
 package nu.mikaelsundh.tonelabex.editor.gui.components;
 
 import nu.mikaelsundh.tonelabex.editor.model.Constants;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -20,7 +22,7 @@ import java.util.Enumeration;
  * Date: 2012-11-12
  */
 public class ExFloatSlider extends FloatJSlider {
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    private static Logger logger = LogManager.getLogger(ExFloatSlider.class);
     float mMinVal;
     float mMaxVal;
     public ExFloatSlider(float min, float max) {
