@@ -12,8 +12,8 @@ public class DeviceEvent extends EventObject {
     public static final int PRESET_CHANGE=3;
     public static final int GUI_CHANGE=4;
     public static final int DATA_CHANGE_SUCCESS =5;
-    private int type;
-    private Object data;
+    private final int type;
+    private final Object data;
 
     public DeviceEvent(Object source, int type, Object data) {
         super(source);

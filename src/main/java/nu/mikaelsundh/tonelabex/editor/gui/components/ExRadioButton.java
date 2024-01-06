@@ -18,7 +18,7 @@ import java.io.IOException;
  * Date: 2012-11-09
  */
 public class ExRadioButton extends JRadioButton {
-    private static Logger logger = LogManager.getLogger(ExRadioButton.class);
+    private static final Logger logger = LogManager.getLogger(ExRadioButton.class);
 
     public ExRadioButton(Icon icon) {
         super();

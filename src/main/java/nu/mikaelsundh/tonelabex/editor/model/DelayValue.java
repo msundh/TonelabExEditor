@@ -7,11 +7,11 @@ import nu.mikaelsundh.tonelabex.editor.utils.PresetParser;
  * Date: 2012-11-10
  */
 public class DelayValue {
-    private boolean mOn;
-    private int mType;
-    private int mLevel;
-    private int mTime;
-    private int mFeedback;
+    private final boolean mOn;
+    private final int mType;
+    private final int mLevel;
+    private final int mTime;
+    private final int mFeedback;
 
     public DelayValue(boolean on, int mTime, int mFeedback, int mLevel, int mType) {
         this.mOn=on;

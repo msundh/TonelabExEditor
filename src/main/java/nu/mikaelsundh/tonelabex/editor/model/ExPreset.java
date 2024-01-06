@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
  * Date: 2012-11-04
  */
 public class ExPreset {
-    private static Logger logger = LogManager.getLogger(ExPreset.class);
+    private static final Logger logger = LogManager.getLogger(ExPreset.class);
     private int nbr;
     private int bank;
     private int nbrInBank;

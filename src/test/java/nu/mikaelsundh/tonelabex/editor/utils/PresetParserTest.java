@@ -2,12 +2,10 @@ package nu.mikaelsundh.tonelabex.editor.utils;
 
 import nu.mikaelsundh.tonelabex.editor.midi.MidiConstants;
 import nu.mikaelsundh.tonelabex.editor.model.*;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 
 /**
  * User: Mikael Sundh
@@ -16,16 +14,16 @@ import static junit.framework.Assert.assertTrue;
 public class PresetParserTest {
 
     @Test
-    public void testParseProgramDump1() throws Exception{
+    public void testParseProgramDump1() {
         String data = "0006020d0812062a004e085064111e000000000344000401080108263c0210000000440000";
         ExPreset ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
-        assertEquals("Test Pedal 1 off", false, PresetParser.isPedal1Enabled(ex));
-        assertEquals("Test Pedal 2 on", true, PresetParser.isPedal2Enabled(ex));
-        assertEquals("Test Amp on", true, PresetParser.isAmpEnabled(ex));
-        assertEquals("Test Cab off", false, PresetParser.isCabEnabled(ex));
-        assertEquals("Test MOD off", false, PresetParser.isModEnabled(ex));
-        assertEquals("Test Delay off", false, PresetParser.isDelayEnabled(ex));
-        assertEquals("Test Reverb off", false, PresetParser.isReverbEnabled(ex));
+        assertFalse("Test Pedal 1 off", PresetParser.isPedal1Enabled(ex));
+        assertTrue("Test Pedal 2 on", PresetParser.isPedal2Enabled(ex));
+        assertTrue("Test Amp on", PresetParser.isAmpEnabled(ex));
+        assertFalse("Test Cab off", PresetParser.isCabEnabled(ex));
+        assertFalse("Test MOD off", PresetParser.isModEnabled(ex));
+        assertFalse("Test Delay off", PresetParser.isDelayEnabled(ex));
+        assertFalse("Test Reverb off", PresetParser.isReverbEnabled(ex));
         Pedal1Value ped1 = PresetParser.getPedal1Value(ex);
         assertEquals("Test Pedal 1 type", 2,ped1.getType()); // TONE
         assertEquals("Test Pedal 1 effect", 13, ped1.getValue());
@@ -43,9 +41,10 @@ public class PresetParserTest {
         assertEquals("Test Presence",17,  PresetParser.getPresence(ex));  // (100)
         assertEquals("Test NR",60,  PresetParser.getNoiseReduction(ex));  //
         ModulationValue modVal = PresetParser.getModulation(ex);
+        assertNotNull(modVal);
         assertEquals("Mod type",3,  modVal.getType());    //ORG PHASE
         assertEquals("Mod Depth(Par 1)", 68, modVal.getResonance()); //Depth
-        assertEquals("Speed (Mod Par 3)", 3.85, modVal.getSpeed()); // Speed   (3.85Hz)
+        assertEquals("Speed (Mod Par 3)", 3.85, modVal.getSpeed(), 0.0); // Speed   (3.85Hz)
         assertEquals("Delay type",1,PresetParser.getDelayType(ex));   // 8
         assertEquals("Delay Level",8,PresetParser.getDelayLevel(ex));     // 1
         assertEquals("Delay Feedback",38,PresetParser.getDelayFeedback(ex));  // 8
@@ -57,16 +56,16 @@ public class PresetParserTest {
     }
 
     @Test
-    public void testParseProgramDump2() throws Exception{
+    public void testParseProgramDump2() {
         String str = "0057000A060B164B00414F2938640F060001140A35360100000114203C0010000000640000";
         ExPreset data = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  str + "F7");
-        assertEquals("Test Pedal 1 on", true, PresetParser.isPedal1Enabled(data));
-        assertEquals("Test Pedal 2 on", true, PresetParser.isPedal2Enabled(data));
-        assertEquals("Test Amp on", true, PresetParser.isAmpEnabled(data));
-        assertEquals("Test Cab off", false, PresetParser.isCabEnabled(data));
-        assertEquals("Test MOD on", true, PresetParser.isModEnabled(data));
-        assertEquals("Test Delay off", false, PresetParser.isDelayEnabled(data));
-        assertEquals("Test Reverb on", true, PresetParser.isReverbEnabled(data));
+        assertTrue("Test Pedal 1 on", PresetParser.isPedal1Enabled(data));
+        assertTrue("Test Pedal 2 on", PresetParser.isPedal2Enabled(data));
+        assertTrue("Test Amp on", PresetParser.isAmpEnabled(data));
+        assertFalse("Test Cab off", PresetParser.isCabEnabled(data));
+        assertTrue("Test MOD on", PresetParser.isModEnabled(data));
+        assertFalse("Test Delay off", PresetParser.isDelayEnabled(data));
+        assertTrue("Test Reverb on", PresetParser.isReverbEnabled(data));
         Pedal1Value ped1 = PresetParser.getPedal1Value(data);
         assertEquals("Test Pedal 1 type", 0, ped1.getType()); //
         assertEquals("Test Pedal 1 effect", 10, ped1.getValue());
@@ -84,6 +83,7 @@ public class PresetParserTest {
         assertEquals("Test Presence",100,  PresetParser.getPresence(data));
         assertEquals("Test NR",30,  PresetParser.getNoiseReduction(data));
         ModulationValue mod = PresetParser.getModulation(data);
+        assertNotNull(mod);
         assertEquals("Mod type",10,  mod.getType());   // TALK MODE
         assertEquals("Mod Par 1", 53, mod.getSens());  //Depth
         assertEquals("Mod Par 2", 54, mod.getResonance()); // Reso
@@ -95,71 +95,79 @@ public class PresetParserTest {
 //        System.out.println("Expr Range max " + PresetParser.getExpressionRangeMax(data));
     }
     @Test
-    public void testParseProgramDump3() throws Exception{
+    public void testParseProgramDump3() {
         String str = "007D0300090907110036324450402D01200013000500500708000A276E0201000000640000";
         ExPreset data = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  str + "F7");
         ModulationValue val = PresetParser.getModulation(data);
-        assertEquals("Test MOD on", true, val.isOn());
+        assertNotNull(val);
+        assertTrue("Test MOD on", val.isOn());
         assertEquals("Test Mod type",0,  val.getType());   // CE CHORUS
         assertEquals("Test Mod Par 1",5, val.getDepth());  //Depth
-        assertEquals("Test Mod Par 2",0.5,  val.getSpeed()); // Speed: 0.50Hz  (val:256)
+        assertEquals("Test Mod Par 2",0.5,  val.getSpeed(),0.0); // Speed: 0.50Hz  (val:256)
+        //assertEquals("Test Mod Par 2",0.5,  val.getSpeed()); // Speed: 0.50Hz  (val:256)
 
         str = "00 7D 02 06 05 46 07 38 00 3C 52 44 32 4E 0F 0A 00 02 17 07 49 46 00 00 00 00 18 34 26 02 14 00 00 00 64 00 00".replace(" ","").toLowerCase();
         data = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  str + "F7");
         val = PresetParser.getModulation(data);
-        assertEquals("Test MOD on", true, val.isOn());
+        assertNotNull(val);
+        assertTrue("Test MOD on", val.isOn());
         assertEquals("Test Mod type",7,  val.getType());   // Slow attack
         assertEquals("Test Mod Par 1",73, val.getAttack());
 
         str = "00 77 02 12 04 00 00 27 00 52 00 64 00 00 0F 03 00 02 28 07 64 46 00 00 00 02 1E 39 22 01 08 00 00 00 14 00 00".replace(" ","").toLowerCase();
         data = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  str + "F7");
         val = PresetParser.getModulation(data);
-        assertEquals("Test MOD on", true, val.isOn());
+        assertNotNull(val);
+        assertTrue("Test MOD on", val.isOn());
         assertEquals("Test Mod type",7,  val.getType());   // Slow attack
         assertEquals("Test Mod Par 1",100, val.getAttack());
     }
     @Test
-    public void testParseProgramDump4() throws Exception{
+    public void testParseProgramDump4() {
         String str = "0055031E04000C1700553D3649120F030000080925380000000213043C0008000000640000";
         ExPreset data = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  str + "F7");
         ModulationValue val = PresetParser.getModulation(data);
-        assertEquals("Test MOD on", true, val.isOn());
+        assertNotNull(val);
+        assertTrue("Test MOD on", val.isOn());
         assertEquals("Test Mod type",9,   val.getType());   // FILTRON,
         assertEquals("Test Mod Par 1",37,  val.getSens());  //Depth
         assertEquals("Test Mod Par 2",56,  val.getResonance()); // Reso
         assertEquals("Mod par 3",Constants.filtronNames[0],Constants.filtronNames[val.getFiltronType()]); // Speed: UP  (val:20487)
     }
     @Test
-    public void testParseProgramDump5() throws Exception{
+    public void testParseProgramDump5() {
         String str = "005D02110164191100593664351D1906000015081700190000000B3B72010C0A00001D0000";
         ExPreset data = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  str + "F7");
         ModulationValue val = PresetParser.getModulation(data);
-        assertEquals("Test MOD on", true, val.isOn());
+        assertNotNull(val);
+        assertTrue("Test MOD on", val.isOn());
         assertEquals("Test Mod type",8,   val.getType());   // PITCH,
         assertEquals("Test Mod Par 1",23,  val.getBalance());  //Balance
         assertEquals("Mod par 3","+12",Constants.pitchNames[val.getPitch()]);  // Speed: +12  (val:6400)
     }
 
     @Test
-    public void testParseProgramDump6() throws Exception{
+    public void testParseProgramDump6() {
         String str = "001d0311050b113c004b204816001e01200000000c00290108010e2e1001080000000b0000";
         ExPreset data = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  str + "F7");
         AmpSapValue amp = PresetParser.getAmp(data);
-        assertEquals("Test Amp on", true, amp.isOn());
+        assertTrue("Test Amp on", amp.isOn());
         assertEquals("Test AMP type", 1,amp.getType()); // SPC
         assertEquals("Test AMP", 6, amp.getModel());   //CLEAN      17, UK Rock
         ModulationValue val = PresetParser.getModulation(data);
-        assertEquals("Test MOD on", true, val.isOn());
+        assertNotNull(val);
+        assertTrue("Test MOD on", val.isOn());
         assertEquals("Test Mod type",0,  val.getType());   // CE CHORUS
         assertEquals("Test Mod Par 1",12, val.getDepth());  //Depth
-        assertEquals("Test Mod Par 2",2.35,  val.getSpeed()); // Speed:
+        assertEquals("Test Mod Par 2",2.35,  val.getSpeed(), 0.0); // Speed:
     }
 
     @Test
-    public void testPitch() throws Exception {
+    public void testPitch() {
         String str = "005C03140819083C00553C320B382300000116083200010008020B237A0001000000640000";
         ExPreset data = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  str + "F7");
         ModulationValue val = PresetParser.getModulation(data);
+        assertNotNull(val);
         assertEquals("Test Mod type",8,  val.getType());   // PITCH
         assertEquals("Test Mod Par 1",50,  val.getBalance());  //Balance
         assertEquals("Test Pitch name","-11",Constants.pitchNames[val.getPitch()]);
@@ -202,19 +210,19 @@ public class PresetParserTest {
     }
 
     @Test
-    public void testModSpeedOrgPhase() throws Exception {
+    public void testModSpeedOrgPhase() {
         String data = "005C03140819083C00553C320B382300000116033F00102708020B237A0001000000640000";
         ExPreset ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
-        assertEquals("Test Mod par 3 0.10Hz: ",0.1, PresetParser.getModulation(ex).getSpeed());
+        assertEquals("Test Mod par 3 0.10Hz: ",0.1, PresetParser.getModulation(ex).getSpeed(), 0.0);
 
         data = "005C03140819083C00553C320B382300000116033F00420008020B237A0001000000640000";
         ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
-        assertEquals("Test Mod par 3 15.0Hz: ",15.0, PresetParser.getModulation(ex).getSpeed());
+        assertEquals("Test Mod par 3 15.0Hz: ",15.0, PresetParser.getModulation(ex).getSpeed(), 0.0);
 
     }
 
     @Test
-    public void testDelay() throws Exception {
+    public void testDelay() {
         String str = "0006020d0812062a004e085064111e000000000344000401080108263c0210000000440000";
         ExPreset data = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  str + "F7");
         DelayValue val = new DelayValue(data);
@@ -241,59 +249,59 @@ public class PresetParserTest {
 
 
     @Test
-    public void testModSpeed() throws Exception {
+    public void testModSpeed() {
         // Preset 18-4 Mod type Multi chorus
         String data="00 75 03 0E 02 32 2A 36 00 3C 44 37 46 1C 32 08 00 00 10 01 31 00 10 27 00 00 09 40 2C 01 0C 00 00 00 64 00 00".replace("","");
         ExPreset ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
-        assertEquals("Mod speed", 0.1, PresetParser.getModulation(ex).getSpeed());
+        assertEquals("Mod speed", 0.1, PresetParser.getModulation(ex).getSpeed(), 0.0);
 
         data="00 75 03 0E 02 32 2A 36 00 3C 44 37 46 1C 32 08 00 00 10 01 31 00 75 24 00 00 09 40 2C 01 0C 00 00 00 64 00 00".replace(" ","");
         ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
-        assertEquals("Mod speed", 0.11, PresetParser.getModulation(ex).getSpeed());
+        assertEquals("Mod speed", 0.11, PresetParser.getModulation(ex).getSpeed(), 0.0);
 
         data="00 75 03 0E 02 32 2A 36 00 3C 44 37 46 1C 32 08 20 00 10 01 31 00 12 16 00 00 09 40 2C 01 0C 00 00 00 64 00 00".replace(" ","");
         ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
-        assertEquals("Mod speed", 0.17, PresetParser.getModulation(ex).getSpeed());
+        assertEquals("Mod speed", 0.17, PresetParser.getModulation(ex).getSpeed(), 0.0);
 
         data="00 75 03 0E 02 32 2A 36 00 3C 44 37 46 1C 32 08 20 00 10 01 31 00 16 0C 00 00 09 40 2C 01 0C 00 00 00 64 00 00".replace(" ","");
         ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
-        assertEquals("Mod speed", 0.31, PresetParser.getModulation(ex).getSpeed());
+        assertEquals("Mod speed", 0.31, PresetParser.getModulation(ex).getSpeed(), 0.0);
 
         data="00 75 03 0E 02 32 2A 36 00 3C 44 37 46 1C 32 08 20 00 10 01 23 00 02 06 00 00 09 40 2C 01 0C 00 00 00 64 00 00".replace(" ","");
         ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
-        assertEquals("Mod speed", 0.60, PresetParser.getModulation(ex).getSpeed());
+        assertEquals("Mod speed", 0.60, PresetParser.getModulation(ex).getSpeed(), 0.0);
 
         data="00 75 03 0E 02 32 2A 36 00 3C 44 37 46 1C 32 08 20 00 10 01 23 00 5D 02 00 00 09 40 2C 01 0C 00 00 00 64 00 00".replace(" ","");
         ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
-        assertEquals("Mod speed", 1.36, PresetParser.getModulation(ex).getSpeed());
+        assertEquals("Mod speed", 1.36, PresetParser.getModulation(ex).getSpeed(), 0.0);
 
         data="00 75 03 0E 02 32 2A 36 00 3C 44 37 46 1C 32 08 20 00 10 01 31 00 74 01 00 00 09 40 2C 01 0C 00 00 00 64 00 00".replace(" ","");
         ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
-        assertEquals("Mod speed", 2.00, PresetParser.getModulation(ex).getSpeed());
+        assertEquals("Mod speed", 2.00, PresetParser.getModulation(ex).getSpeed(), 0.0);
 
         data="00 75 03 0E 02 32 2A 36 00 3C 44 37 46 1C 32 08 20 00 10 01 23 00 10 01 00 00 09 40 2C 01 0C 00 00 00 64 00 00".replace(" ","");
         ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
-        assertEquals("Mod speed", 2.50, PresetParser.getModulation(ex).getSpeed());
+        assertEquals("Mod speed", 2.50, PresetParser.getModulation(ex).getSpeed(), 0.0);
 
         data="00 75 03 0E 02 32 2A 36 00 3C 44 37 46 1C 32 08 00 00 10 01 23 00 21 01 00 00 09 40 2C 01 0C 00 00 00 64 00 00".replace(" ","");
         ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
-        assertEquals("Mod speed", 3.46, PresetParser.getModulation(ex).getSpeed());
+        assertEquals("Mod speed", 3.46, PresetParser.getModulation(ex).getSpeed(), 0.0);
 
         data="00 75 03 0E 02 32 2A 36 00 3C 44 37 46 1C 32 08 20 00 10 01 23 00 13 00 00 00 09 40 2C 01 0C 00 00 00 64 00 00".replace(" ","");
         ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
-        assertEquals("Mod speed", 6.80, PresetParser.getModulation(ex).getSpeed());
+        assertEquals("Mod speed", 6.80, PresetParser.getModulation(ex).getSpeed(), 0.0);
 
         data="00 75 03 0E 02 32 2A 36 00 3C 44 37 46 1C 32 08 00 00 10 01 23 00 50 00 00 00 09 40 2C 01 0C 00 00 00 64 00 00".replace(" ","");
         ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
-        assertEquals("Mod speed", 12.50, PresetParser.getModulation(ex).getSpeed());
+        assertEquals("Mod speed", 12.50, PresetParser.getModulation(ex).getSpeed(), 0.0);
 
         data="00 75 03 0E 02 32 2A 36 00 3C 44 37 46 1C 32 08 00 00 10 01 23 00 42 00 00 00 09 40 2C 01 0C 00 00 00 64 00 00".replace(" ","");
         ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
-        assertEquals("Mod speed", 15.00, PresetParser.getModulation(ex).getSpeed());
+        assertEquals("Mod speed", 15.00, PresetParser.getModulation(ex).getSpeed(), 0.0);
     }
 
     @Test
-    public void testAmpAmpType() throws Exception {
+    public void testAmpAmpType() {
 
         String str = "005C03140819083C00553C320B382300000116083200010008020B237A0001000000640000";  //0x08
         ExPreset data = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  str + "F7");
@@ -321,7 +329,7 @@ public class PresetParserTest {
     }
 
     @Test
-    public void testFrequencyCalc() throws Exception {
+    public void testFrequencyCalc() {
         String data = "0006020d0812062a004e085064111e000000000344000401080108263c0210000000440000";
         ExPreset ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
         ModulationValue modVal = PresetParser.getModulation(ex);
@@ -330,7 +338,7 @@ public class PresetParserTest {
         byte offset = ex.getData()[16];
 //        System.out.println("Param 3: " + Integer.toHexString(param3[0]) + Integer.toHexString(param3[1]));
 //        System.out.println("Offset1: " + Integer.toHexString(offset));
-        assertEquals("Speed (Mod Par 3)", 3.85, modVal.getSpeed()); // Speed
+        assertEquals("Speed (Mod Par 3)", 3.85, modVal.getSpeed(), 0.0); // Speed
         ExGuiPreset preset = new ExGuiPreset(ex);
         byte[] newData = new byte[ex.getData().length];
         newData = PresetParser.getModulation(preset,newData);
@@ -373,7 +381,7 @@ public class PresetParserTest {
 //    }
 
     @Test
-    public void testExPresetGuiConvert() throws Exception {
+    public void testExPresetGuiConvert() {
         testConvertExToGuiToEx( "0006020d0812062a004e085064111e000000000344000401080108263c0210000000440000");
         testConvertExToGuiToEx( "0057000A060B164B00414F2938640F060001140A35360100000114203C0010000000640000".toLowerCase());
         testConvertExToGuiToEx("007D0300090907110036324450402D01200013000500500708000A276E0201000000640000".toLowerCase());
@@ -424,9 +432,9 @@ public class PresetParserTest {
         assertEquals("Test Presence",gex.getPresenceValue(),  PresetParser.getPresence(newEx));  // (100)
         assertEquals("Test NR",gex.getNoiseValue(),  PresetParser.getNoiseReduction(newEx));
         ModulationValue modVal = PresetParser.getModulation(newEx);
-        assertEquals("Mod type",gex.getModulationValue().getType(),  modVal.getType());    //ORG PHASE
-        assertEquals("Mod Res", gex.getModulationValue().getResonance(), modVal.getResonance());
-        assertEquals("Mod speed", gex.getModulationValue().getSpeed(), modVal.getSpeed());
+        assertEquals("Mod type",gex.getModulationValue().getType(),  modVal.getType(), 0.0);    //ORG PHASE
+        assertEquals("Mod Res", gex.getModulationValue().getResonance(), modVal.getResonance(), 0.0);
+        assertEquals("Mod speed", gex.getModulationValue().getSpeed(), modVal.getSpeed(), 0.0);
         assertEquals("Mod attack", gex.getModulationValue().getAttack(), modVal.getAttack());
         assertEquals("Mod Sens", gex.getModulationValue().getSens(), modVal.getSens());
         assertEquals("Mod Balance", gex.getModulationValue().getBalance(), modVal.getBalance());
@@ -439,13 +447,13 @@ public class PresetParserTest {
         assertEquals("Delay Feedback",gex.getDelayValue().getFeedback(),PresetParser.getDelayFeedback(newEx));  // 8
         assertEquals("Delay Time", gex.getDelayValue().getTime(), PresetParser.getDelayTime(newEx));    // 9788   (0x263C)
         assertEquals("Expr Target", gex.getPedalAssignValue().getAssign(), PresetParser.getPedalAssignValue(newEx).getAssign());
-        assertEquals("Expr Min", gex.getPedalAssignValue().getFRangeMin(), PresetParser.getPedalAssignValue(newEx).getFRangeMin());
-        assertEquals("Expr Max", gex.getPedalAssignValue().getFRangeMax(), PresetParser.getPedalAssignValue(newEx).getFRangeMax());
+        assertEquals("Expr Min", gex.getPedalAssignValue().getFRangeMin(), PresetParser.getPedalAssignValue(newEx).getFRangeMin(), 0.0);
+        assertEquals("Expr Max", gex.getPedalAssignValue().getFRangeMax(), PresetParser.getPedalAssignValue(newEx).getFRangeMax(), 0.0);
         return HexUtil.toHexString(newEx.getData());
     }
     //TODO: IMPLEMENT SPEED
     @Test
-    public void testPedalAssign() throws Exception {
+    public void testPedalAssign() {
         // preset 4 mod speed, G4 3.3, - , 0.8
 //        String str = "00 5E 00 0F 04 00 0C 21 00 50 29 54 43 5C 1E 0A 20 00 05 06 21 00 62 04 40 02 0B 39 52 03 12 62 00 04 64 00 00".replace(" ","");
 //        ExPreset ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  str + "F7");
@@ -573,7 +581,7 @@ public class PresetParserTest {
     }
 
     @Test
-    public void testPedalAssign2() throws Exception {
+    public void testPedalAssign2() {
         String  str = "00 77 02 17 03 47 26 13 00 32 32 3D 31 00 2E 03 00 01 0B 08 64 00 0C 00 00 03 07 2E 1C 02 04 00 00 00 1E 00 00".replace(" ","");
         ExPreset ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  str + "F7");
         assertEquals("Expr Target",2, PresetParser.getPedalAssignValue(ex).getAssign());
@@ -658,7 +666,7 @@ public class PresetParserTest {
     }
 
     @Test
-    public void testOnOff() throws Exception {
+    public void testOnOff() {
         String data = "007f020d0812062a004e085064111e000000000344000401080108263c0210000000440000";
         ExPreset ex = new ExPreset(MidiConstants.SYSEX_START_STR + "4C2000" +  data + "F7");
         assertTrue("Pedal1",PresetParser.isPedal1Enabled(ex));

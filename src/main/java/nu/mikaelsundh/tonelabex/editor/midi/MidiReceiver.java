@@ -16,7 +16,7 @@ import java.util.LinkedList;
  * Date: 2012-11-04
  */
 public class MidiReceiver extends Thread {
-    private static Logger logger = LogManager.getLogger(MidiReceiver.class);
+    private static final Logger logger = LogManager.getLogger(MidiReceiver.class);
     boolean running=true;
     GuiListenerHandler guiListener = GuiListenerHandler.getInstance();
     LinkedList<MidiMessage> incomingData=new LinkedList<MidiMessage>();
@@ -62,7 +62,6 @@ public class MidiReceiver extends Thread {
             guiListener.fireEvent(new DeviceEvent(this,DeviceEvent.PRESET_CHANGE, new byte[]{fullData.getMessage()[MidiConstants.SYSEX_START.length+1],fullData.getMessage()[MidiConstants.SYSEX_START.length+2]}));
         } else
             logger.warn("No command implementation for function code: "+Integer.toHexString(functionCode));
-        return;
     }
 //    public synchronized void processIncomingCommand(String fullData) {
 ////        System.out.println("MidiReceiver.processIncomingCommand: " + fullData);

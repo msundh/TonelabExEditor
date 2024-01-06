@@ -4,7 +4,6 @@ import nu.mikaelsundh.tonelabex.editor.model.DeviceEvent;
 import nu.mikaelsundh.tonelabex.editor.model.DeviceListener;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * User: Mikael Sundh
@@ -30,14 +29,12 @@ public class GuiListenerHandler {
     }
 
     public synchronized void removeDeviceListener(DeviceListener l) {
-        if (listeners.contains(l))
-            listeners.remove(listeners.indexOf(l));
+        listeners.remove(l);
     }
 
     public synchronized void fireEvent( DeviceEvent event)	{
-        Iterator i = listeners.iterator();
-        while(i.hasNext())	{
-            ((DeviceListener) i.next()).inMessage(event);
+        for (DeviceListener listener : listeners) {
+            listener.inMessage(event);
         }
     }
 }

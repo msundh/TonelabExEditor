@@ -17,7 +17,7 @@ import javax.swing.event.ChangeListener;
  * Date: 2012-11-19
  */
 public class ExRangeSlider extends RangeSlider {
-    private static Logger logger = LogManager.getLogger(ExRangeSlider.class);
+    private static final Logger logger = LogManager.getLogger(ExRangeSlider.class);
     int mMinVal;
     int mMaxVal;
 

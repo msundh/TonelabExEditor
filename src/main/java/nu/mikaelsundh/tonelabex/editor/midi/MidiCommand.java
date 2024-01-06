@@ -10,9 +10,9 @@ import org.apache.logging.log4j.Logger;
  * Date: 2012-11-06
  */
 public abstract class MidiCommand implements IMidiCommand {
-    private static Logger logger = LogManager.getLogger(MidiCommand.class);
+    private static final Logger logger = LogManager.getLogger(MidiCommand.class);
 
-    public enum State { NEW, INIT, EXECUTED, FINISHED, WAIT, ARRIVED };
+    public enum State { NEW, INIT, EXECUTED, FINISHED, WAIT, ARRIVED }
     protected State state = State.NEW;
     int index = 0;
     protected String functionCode;
@@ -88,7 +88,7 @@ public abstract class MidiCommand implements IMidiCommand {
 
     public static String formatIncomingData(String fulldata){
         String ret="";
-        int off=0;
+        int off;
         int len=fulldata.length();
         for(off=0;off<len;off+=8){
             int remain=len-off;
@@ -111,9 +111,7 @@ public abstract class MidiCommand implements IMidiCommand {
 
 
     public synchronized boolean isRunning() {
-        if(state.equals(State.ARRIVED))
-            return false;
-        return true;
+        return !state.equals(State.ARRIVED);
     }
 
 

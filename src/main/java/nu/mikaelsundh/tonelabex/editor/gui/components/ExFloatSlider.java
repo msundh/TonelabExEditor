@@ -22,7 +22,7 @@ import java.util.Enumeration;
  * Date: 2012-11-12
  */
 public class ExFloatSlider extends FloatJSlider {
-    private static Logger logger = LogManager.getLogger(ExFloatSlider.class);
+    private static final Logger logger = LogManager.getLogger(ExFloatSlider.class);
     float mMinVal;
     float mMaxVal;
     public ExFloatSlider(float min, float max) {
@@ -98,7 +98,7 @@ public class ExFloatSlider extends FloatJSlider {
 
     private static class MySliderUI extends BasicSliderUI {
 
-        private static float[] fracs = {0.0f, 0.2f, 0.4f, 0.6f, 0.8f, 1.0f};
+        private static final float[] fracs = {0.0f, 0.2f, 0.4f, 0.6f, 0.8f, 1.0f};
         private LinearGradientPaint p;
 
         public MySliderUI(JSlider slider) {
@@ -157,7 +157,7 @@ public class ExFloatSlider extends FloatJSlider {
         }
     }
 
-    class coloredThumbSliderUI extends BasicSliderUI
+    static class coloredThumbSliderUI extends BasicSliderUI
     {
 
         Color thumbColor;

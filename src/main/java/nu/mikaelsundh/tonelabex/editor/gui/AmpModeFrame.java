@@ -24,7 +24,7 @@ import java.io.IOException;
  * Date: 2012-11-07
  */
 public class AmpModeFrame extends JPanel {
-    private static Logger logger = LogManager.getLogger(AmpModeFrame.class);
+    private static final Logger logger = LogManager.getLogger(AmpModeFrame.class);
     GuiListenerHandler guiListener;
     boolean initiating = false;
     private static final String AMP_NORMAL = "Normal";

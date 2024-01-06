@@ -5,11 +5,11 @@ package nu.mikaelsundh.tonelabex.editor.midi;
  * Date: 2012-11-05
  */
 public interface IMidiCommand {
-    public void run();
-    public void receive(byte[] data) throws MidiException;
-    public void prepare();
-    public void finished();
-    public void waitForResult();
-    public boolean ranSuccessfully();
-    public byte[] getResultData();
+    void run();
+    void receive(byte[] data) throws MidiException;
+    void prepare();
+    void finished();
+    void waitForResult();
+    boolean ranSuccessfully();
+    byte[] getResultData();
 }

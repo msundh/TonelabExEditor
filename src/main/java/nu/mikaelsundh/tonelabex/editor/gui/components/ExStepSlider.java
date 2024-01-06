@@ -15,7 +15,7 @@ import java.util.Hashtable;
  * Date: 2012-11-08
  */
 public class ExStepSlider extends JSlider {
-    private static Logger logger = LogManager.getLogger(ExStepSlider.class);
+    private static final Logger logger = LogManager.getLogger(ExStepSlider.class);
     int mMinVal;
     int mMaxVal;
 

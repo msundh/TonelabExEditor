@@ -13,7 +13,7 @@ import java.util.Hashtable;
  * Date: 2012-11-21
  */
 public class ExStepRangeSlider extends ExRangeSlider {
-    private static Logger logger = LogManager.getLogger(ExStepRangeSlider.class);
+    private static final Logger logger = LogManager.getLogger(ExStepRangeSlider.class);
     int mMinVal;
     int mMaxVal;
 

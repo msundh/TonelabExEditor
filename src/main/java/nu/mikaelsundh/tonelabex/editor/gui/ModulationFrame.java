@@ -23,7 +23,7 @@ import java.awt.event.MouseEvent;
  * Date: 2012-11-08
  */
 public class ModulationFrame extends JPanel {
-    private static Logger logger = LogManager.getLogger(ModulationFrame.class);
+    private static final Logger logger = LogManager.getLogger(ModulationFrame.class);
     GuiListenerHandler guiListener;
     boolean initiating = false;
     ExStepSlider mType;

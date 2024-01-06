@@ -15,7 +15,7 @@ import java.io.IOException;
  * Date: 2012-11-09
  */
 public class ToggleButton extends JToggleButton {
-    private static Logger logger = LogManager.getLogger(ToggleButton.class);
+    private static final Logger logger = LogManager.getLogger(ToggleButton.class);
 
     public ToggleButton() {
         super();

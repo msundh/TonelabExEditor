@@ -14,7 +14,7 @@ import java.io.*;
  * Date: 2012-11-06
  */
 public class FileManager {
-    private static Logger logger = LogManager.getLogger(FileManager.class);
+    private static final Logger logger = LogManager.getLogger(FileManager.class);
 
     public static void writePresetToFile(Component parent, ExPreset preset) {
         JFileChooser jfc = new JFileChooser();
@@ -65,7 +65,9 @@ public class FileManager {
                 output.write(data);
             }
             finally {
-                output.close();
+                if (output != null) {
+                    output.close();
+                }
             }
         }
         catch(FileNotFoundException e){
@@ -100,7 +102,9 @@ public class FileManager {
             }
             finally {
                 logger.debug("Closing input stream.");
-                input.close();
+                if ( input != null) {
+                    input.close();
+                }
             }
         }
         catch (FileNotFoundException ex) {

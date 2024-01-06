@@ -10,8 +10,8 @@ import java.awt.*;
  * Date: 2012-11-07
  */
 public class CircleIcon implements Icon {
-    private int mSize;
-    private Color mColor;
+    private final int mSize;
+    private final Color mColor;
     public CircleIcon(int size, Color color) {
         mSize = size;
         mColor = color;

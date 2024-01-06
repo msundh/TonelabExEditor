@@ -25,7 +25,7 @@ import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
  * Date: 2012-11-04
  */
 public class MainFrame extends JFrame implements MenuContainer, Serializable, RootPaneContainer, WindowConstants, DeviceListener {
-    private static Logger logger = LogManager.getLogger(MainFrame.class);
+    private static final Logger logger = LogManager.getLogger(MainFrame.class);
     private static final int MAIN_WINDOW_HEIGTH = 850;
     private static final int MAIN_WINDOW_WIDTH = 1445;
     MidiController deviceCtrl;

@@ -1,7 +1,6 @@
 package nu.mikaelsundh.tonelabex.editor.gui.components;
 
 import nu.mikaelsundh.tonelabex.editor.gui.GuiListenerHandler;
-import nu.mikaelsundh.tonelabex.editor.gui.components.ExSlider;
 import nu.mikaelsundh.tonelabex.editor.model.Constants;
 import nu.mikaelsundh.tonelabex.editor.model.DeviceEvent;
 

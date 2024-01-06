@@ -5,8 +5,8 @@ package nu.mikaelsundh.tonelabex.editor.model;
  * Date: 2012-11-19
  */
 public class PedalAssignValue {
-    private int mAssign;
-    private int mModulationType;
+    private final int mAssign;
+    private final int mModulationType;
     double mFRangeMin;
     double mFRangeMax;
 

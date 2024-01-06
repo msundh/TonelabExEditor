@@ -34,18 +34,8 @@ package org.jsresources.midi;
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import	java.io.PrintStream;
-
-import	javax.sound.midi.MidiSystem;
-import	javax.sound.midi.InvalidMidiDataException;
-import	javax.sound.midi.Sequence;
-import	javax.sound.midi.Track;
-import	javax.sound.midi.MidiEvent;
-import	javax.sound.midi.MidiMessage;
-import	javax.sound.midi.ShortMessage;
-import	javax.sound.midi.MetaMessage;
-import	javax.sound.midi.SysexMessage;
-import	javax.sound.midi.Receiver;
+import javax.sound.midi.*;
+import java.io.PrintStream;
 
 
 

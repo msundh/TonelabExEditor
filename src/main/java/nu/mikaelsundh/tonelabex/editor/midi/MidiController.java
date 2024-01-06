@@ -14,13 +14,13 @@ import java.util.Stack;
  * Date: 2012-11-04
  */
 public class MidiController implements Receiver {
-    private static Logger logger = LogManager.getLogger(MidiController.class);
+    private static final Logger logger = LogManager.getLogger(MidiController.class);
     private static MidiController instance;
     MidiDevice outDevice = null;
     MidiDevice input = null;
     Receiver receiver = null;
-    MidiReceiver mMidiReciever = null;
-    Stack<IMidiCommand> commandStack = new Stack<IMidiCommand>();
+    MidiReceiver mMidiReciever;
+    final Stack<IMidiCommand> commandStack = new Stack<IMidiCommand>();
 
 
     public MidiController() {

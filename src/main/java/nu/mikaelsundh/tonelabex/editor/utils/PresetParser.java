@@ -385,13 +385,13 @@ public class PresetParser {
             case 6:
                 data[20] = (byte) preset.getModulationValue().getDepth();
                 data[21] = 0x00; //Parameter 2
-                data = getModFrequency(preset, data);
+                data = getModFrequency(preset, data);//TODO: What is this?
                 break;
             case 2:
             case 3:
                 data[20] = (byte) preset.getModulationValue().getResonance();//Parameter 1
                 data[21] = 0x00; //Parameter 2
-                data = getModFrequency(preset, data);
+                data = getModFrequency(preset, data); //TODO: What is this?
                 break;
             case 7: // Slow Attack
                 data[20] = (byte)preset.getModulationValue().getAttack();
@@ -471,8 +471,7 @@ public class PresetParser {
         data[25] = (byte) preset.getDelayValue().getType();
         data[26] = (byte) preset.getDelayValue().getLevel();
         data[27] = (byte) preset.getDelayValue().getFeedback();
-        data = getDelayTime(preset.getDelayValue().getTime(), data);
-        return data;
+        return getDelayTime(preset.getDelayValue().getTime(), data);
     }
 
     private static byte[] getDelayTime(int ms, byte[] data) {

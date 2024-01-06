@@ -48,7 +48,7 @@ public class ExFloatRangeSlider extends RangeSlider {
             @Override
             public void stateChanged(ChangeEvent changeEvent) {
                 if (!getValueIsAdjusting()) {
-                    setToolTipText(String.valueOf(getFloatLowValue() + " - " + getFloatHighValue()));
+                    setToolTipText(getFloatLowValue() + " - " + getFloatHighValue());
                 }
             }
         });

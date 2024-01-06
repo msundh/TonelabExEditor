@@ -21,7 +21,7 @@ import java.awt.event.MouseEvent;
  * Date: 2012-11-08
  */
 public class PedalAssignFrame extends JPanel {
-    private static Logger logger = LogManager.getLogger(PedalAssignFrame.class);
+    private static final Logger logger = LogManager.getLogger(PedalAssignFrame.class);
     GuiListenerHandler guiListener;
     ToggleButton mInverted;
     boolean initiating = false;
@@ -183,11 +183,7 @@ public class PedalAssignFrame extends JPanel {
             mFloatValueSlider.setVisible(false);
             mPitchSlider.setVisible(false);
         } else { // Delay and Reverb cannot be changed
-            if (mTypeSlider.getValue() == 8 || mTypeSlider.getValue() == 10) {
-                mValueSlider.setEnabled(false);
-            } else {
-                mValueSlider.setEnabled(true);
-            }
+            mValueSlider.setEnabled(mTypeSlider.getValue() != 8 && mTypeSlider.getValue() != 10);
         }
         switch (mTypeSlider.getValue()) {
             case 1:     // Volume
@@ -291,14 +287,14 @@ public class PedalAssignFrame extends JPanel {
         if (mTypeSlider.getValue() == 6 || mTypeSlider.getValue() == 7) {
             if (mModType == 8) { // Pitch
                 if (mInverted.isSelected())
-                    return new PedalAssignValue(mTypeSlider.getValue(), (double) mPitchSlider.getHighValue(), (double) mPitchSlider.getLowValue(), mModType);
+                    return new PedalAssignValue(mTypeSlider.getValue(), mPitchSlider.getHighValue(), mPitchSlider.getLowValue(), mModType);
                 else
-                    return new PedalAssignValue(mTypeSlider.getValue(), (double) mPitchSlider.getLowValue(), (double) mPitchSlider.getHighValue(), mModType);
+                    return new PedalAssignValue(mTypeSlider.getValue(), mPitchSlider.getLowValue(), mPitchSlider.getHighValue(), mModType);
             } else if (mModType == 9 || mModType == 10) { // Filtron, Talk
                 if (mInverted.isSelected())
-                    return new PedalAssignValue(mTypeSlider.getValue(), (double) mValueSlider.getHighValue(), (double) mValueSlider.getLowValue(), mModType);
+                    return new PedalAssignValue(mTypeSlider.getValue(), mValueSlider.getHighValue(), mValueSlider.getLowValue(), mModType);
                 else
-                    return new PedalAssignValue(mTypeSlider.getValue(), (double) mValueSlider.getLowValue(), (double) mValueSlider.getHighValue(), mModType);
+                    return new PedalAssignValue(mTypeSlider.getValue(), mValueSlider.getLowValue(), mValueSlider.getHighValue(), mModType);
             } else { // Mod type < 7 Speed TODO: IMPLEMENT
 //                if (mInverted.isSelected()) {
 //                    return new PedalAssignValue(mTypeSlider.getValue(), (double) mFloatValueSlider.getFloatHighValue(), (double) mFloatValueSlider.getFloatLowValue(), mModType);
@@ -307,24 +303,24 @@ public class PedalAssignFrame extends JPanel {
 //                }
                 // SEt to min/max until we implement speed calculation
                 if (mInverted.isSelected())
-                    return new PedalAssignValue(mTypeSlider.getValue(), (double) mFloatValueSlider.getFloatMaximum(), (double) mFloatValueSlider.getFloatMinimum(), mModType);
+                    return new PedalAssignValue(mTypeSlider.getValue(), mFloatValueSlider.getFloatMaximum(), mFloatValueSlider.getFloatMinimum(), mModType);
                 else
-                    return new PedalAssignValue(mTypeSlider.getValue(), (double) mFloatValueSlider.getFloatMinimum(), (double) mFloatValueSlider.getFloatMaximum(), mModType);
+                    return new PedalAssignValue(mTypeSlider.getValue(), mFloatValueSlider.getFloatMinimum(), mFloatValueSlider.getFloatMaximum(), mModType);
             }
 
         } else {
             if (mInverted.isSelected())
-                return new PedalAssignValue(mTypeSlider.getValue(), (double) mValueSlider.getHighValue(), (double) mValueSlider.getLowValue(), mModType);
+                return new PedalAssignValue(mTypeSlider.getValue(), mValueSlider.getHighValue(), mValueSlider.getLowValue(), mModType);
             else
-                return new PedalAssignValue(mTypeSlider.getValue(), (double) mValueSlider.getLowValue(), (double) mValueSlider.getHighValue(), mModType);
+                return new PedalAssignValue(mTypeSlider.getValue(), mValueSlider.getLowValue(), mValueSlider.getHighValue(), mModType);
         }
 
     }
 
     // TODO: VERIFY when Speed
     private void updateRange(double low, double high) throws MidiException {
-        double min = 0;
-        double max = 0;
+        double min;
+        double max;
         boolean inverted = (low > high);
         setInverted(inverted);
 
@@ -343,9 +339,9 @@ public class PedalAssignFrame extends JPanel {
             setRangeValues(inverted ? high : low, inverted ? low : high);
         } else {
             if (inverted)
-                setRangeValues(low > max ? max : low, high < min ? min : high);
+                setRangeValues(Math.min(low, max), Math.max(high, min));
             else
-                setRangeValues(low < min ? min : low, high > max ? max : high);
+                setRangeValues(Math.max(low, min), Math.min(high, max));
             throw new MidiException("Invalid range values: (" + low + "/" + high + ") other values have set instead");
         }
 

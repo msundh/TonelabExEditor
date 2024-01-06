@@ -20,7 +20,7 @@ import java.awt.event.MouseEvent;
  * Date: 2012-11-08
  */
 public class CabinetFrame extends JPanel {
-    private static Logger logger = LogManager.getLogger(CabinetFrame.class);
+    private static final Logger logger = LogManager.getLogger(CabinetFrame.class);
     GuiListenerHandler guiListener;
     boolean initiating=false;
     ToggleButton mOn;

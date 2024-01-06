@@ -8,18 +8,18 @@ import org.apache.logging.log4j.Logger;
  * Date: 2012-11-09
  */
 public class ModulationValue {
-    private static Logger logger = LogManager.getLogger(ModulationValue.class);
-    private boolean mOn;
-    private int mType;
-    private int mDepth;
-    private double mSpeed;
-    private int mResonance;
-    private int mAttack;
-    private int mBalance;
-    private int mPitch;
-    private int mSens;
-    private int mFiltronType;
-    private int mTalkType;
+    private static final Logger logger = LogManager.getLogger(ModulationValue.class);
+    private final boolean mOn;
+    private final int mType;
+    private final int mDepth;
+    private final double mSpeed;
+    private final int mResonance;
+    private final int mAttack;
+    private final int mBalance;
+    private final int mPitch;
+    private final int mSens;
+    private final int mFiltronType;
+    private final int mTalkType;
 
 
     public ModulationValue(boolean  on,int type,int depth ,double speed,int reso, int attack, int balance,int pitch,int sens,int filtronType, int talkType) {

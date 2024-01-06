@@ -9,14 +9,14 @@ import org.apache.logging.log4j.Logger;
  * Date: 2012-11-10
  */
 public class AmpSapValue {
-    private static Logger logger = LogManager.getLogger(AmpSapValue.class);
+    private static final Logger logger = LogManager.getLogger(AmpSapValue.class);
     private static boolean mOn;
     private static int mType;
     private static int mModel;
 
     public AmpSapValue( boolean on, int value) {
         mOn = on;
-        mType = (int)value/11;
+        mType = value /11;
         mModel = value-mType*11;
         logger.debug("on: " + mOn + ", Val: " + value +", type: " + mType + ", model " + mModel);
     }

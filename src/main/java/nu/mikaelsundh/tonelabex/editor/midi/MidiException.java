@@ -8,7 +8,7 @@ import nu.mikaelsundh.tonelabex.editor.utils.MidiUtil;
  */
 public class MidiException extends Exception {
     private static final long serialVersionUID = 1L;
-    private String ErrorCode;
+    private final String ErrorCode;
     public MidiException(String message) {
         super(message);
         ErrorCode = "";

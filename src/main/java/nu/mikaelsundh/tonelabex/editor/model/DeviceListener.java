@@ -7,5 +7,5 @@ import java.util.EventListener;
  * Date: 2012-11-15
  */
 public interface DeviceListener extends EventListener {
-    public void inMessage(DeviceEvent e);
+    void inMessage(DeviceEvent e);
 }

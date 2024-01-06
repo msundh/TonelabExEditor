@@ -6,10 +6,10 @@ package nu.mikaelsundh.tonelabex.editor.utils;
  */
 public class HexUtil {
     public static String toHexString(byte[] data) {
-        StringBuffer ret = new StringBuffer();
-        for (int i = 0; i < data.length; ++i)  {
+        StringBuilder ret = new StringBuilder();
+        for (byte datum : data) {
             ret.append(
-                    Integer.toHexString(0x0100 + (data[i] & 0x00FF)).substring(1));
+                    Integer.toHexString(0x0100 + (datum & 0x00FF)).substring(1));
         }
         return ret.toString().toLowerCase();
     }

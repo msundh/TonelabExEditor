@@ -15,7 +15,7 @@ import java.io.IOException;
  * Date: 2012-11-07
  */
 public class TonelabEx {
-    private static Logger logger = LogManager.getLogger(TonelabEx.class);
+    private static final Logger logger = LogManager.getLogger(TonelabEx.class);
 
     public static final boolean DEVELOPE_MIDI_ON=true;
     public static final boolean DEVELOPE_TEST_MENU_ON=false;

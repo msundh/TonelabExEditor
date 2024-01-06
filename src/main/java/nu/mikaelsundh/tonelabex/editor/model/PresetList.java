@@ -10,7 +10,7 @@ import java.util.TreeMap;
  * Date: 2012-11-04
  */
 public class PresetList {
-    private static SortedMap<Integer,ExPreset> presetMap = new TreeMap<Integer, ExPreset>();
+    private static final SortedMap<Integer,ExPreset> presetMap = new TreeMap<Integer, ExPreset>();
 
     public static ExPreset getPreset(int nbr) {
         return presetMap.get(nbr);
